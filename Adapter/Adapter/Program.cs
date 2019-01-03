@@ -16,25 +16,25 @@ namespace Adapter
         }
 
         #region class Adapter
-        public class CEqipmentHDD
+        public class ICEqipmentHDD
         {
             public void Start() { Console.WriteLine(this.GetType().Name + ".Start()"); }
             public void End() { Console.WriteLine(this.GetType().Name + ".End()"); }
         }
 
-        public class CEqipmentSSD
+        public class ICEqipmentSSD
         {
             public void Begin() { Console.WriteLine(this.GetType().Name + ".Begin()"); }
             public void Terminate() { Console.WriteLine(this.GetType().Name + ".Terminate()"); }
         }
 
-        public class CAdapterHDD : CEqipmentHDD, IMyAppAbstract
+        public class CAdapterHDD : ICEqipmentHDD, IMyAppAbstract
         {
             public void Open() { this.Start(); }
             public void Close() { this.End(); }
         }
 
-        public class CAdapterSSD : CEqipmentSSD, IMyAppAbstract
+        public class CAdapterSSD : ICEqipmentSSD, IMyAppAbstract
         {
             public void Open() { this.Begin(); }
             public void Close() { this.Terminate(); }
@@ -44,13 +44,13 @@ namespace Adapter
         #endregion
 
         #region object Adapter
-        public class EqipmentHDD
+        public class IEqipmentHDD
         {
             public void Start() { Console.WriteLine(this.GetType().Name + ".Start()"); }
             public void End() { Console.WriteLine(this.GetType().Name + ".End()"); }
         }
 
-        public class EqipmentSSD
+        public class IEqipmentSSD
         {
             public void Begin() { Console.WriteLine(this.GetType().Name + ".Begin()"); }
             public void Terminate() { Console.WriteLine(this.GetType().Name + ".Terminate()"); }
@@ -58,9 +58,9 @@ namespace Adapter
 
         public class AdapterHDD : IMyAppAbstract
         {
-            private EqipmentHDD A { get; set; }
+            private IEqipmentHDD A { get; set; }
 
-            public AdapterHDD(EqipmentHDD a)
+            public AdapterHDD(IEqipmentHDD a)
             {
                 this.A = a;
             }
@@ -71,9 +71,9 @@ namespace Adapter
 
         public class AdapterSSD : IMyAppAbstract
         {
-            private EqipmentSSD B { get; set; }
+            private IEqipmentSSD B { get; set; }
 
-            public AdapterSSD(EqipmentSSD a)
+            public AdapterSSD(IEqipmentSSD a)
             {
                 this.B = a;
             }
@@ -85,7 +85,7 @@ namespace Adapter
 
         static void Main(string[] args)
         {
-            IMyAppAbstract adapter = new AdapterHDD(new EqipmentHDD());
+            IMyAppAbstract adapter = new AdapterHDD(new IEqipmentHDD());
             adapter.Open();
             adapter.Close();
 
